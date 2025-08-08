@@ -21,21 +21,21 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    countInStock: {
-      type: Number,
-      required: true,
-      default: 0,
-    },
-    rating: {
-      type: Number,
-      required: true,
-      default: 0,
-    },
-    numReviews: {
-      type: Number,
-      required: true,
-      default: 0,
-    },
+    // countInStock: {
+    //   type: Number,
+    //   required: true,
+    //   default: 0,
+    // },
+    // rating: {
+    //   type: Number,
+    //   required: true,
+    //   default: 0,
+    // },
+    // numReviews: {
+    //   type: Number,
+    //   required: true,
+    //   default: 0,
+    // },
   },
   {
     timestamps: true,
