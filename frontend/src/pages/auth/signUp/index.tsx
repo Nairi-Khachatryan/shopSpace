@@ -1,6 +1,8 @@
 import { withZodSchema } from 'formik-validator-zod';
 import { useFormik } from 'formik';
 import { z } from 'zod';
+import s from './signUp.module.scss';
+import { useState } from 'react';
 
 const signUpSchema = z
   .object({
@@ -14,6 +16,30 @@ const signUpSchema = z
   });
 
 export const SignUp = () => {
+  const [signUpStatus, setSignUpStatus] = useState({});
+
+  async function register(values) {
+    const { email, password } = values;
+
+    try {
+      const res = await fetch('http://localhost:5050/auth/signUp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      setSignUpStatus(res);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      }
+    }
+  }
+
+  console.log(signUpStatus, 'signUpStatus');
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -22,12 +48,12 @@ export const SignUp = () => {
     },
     validate: withZodSchema(signUpSchema),
     onSubmit: (values) => {
-      console.log(values, 'values');
+      register(values);
     },
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form className={s.form} onSubmit={formik.handleSubmit}>
       <label>Email Address</label>
       <input
         name="email"
@@ -35,26 +61,32 @@ export const SignUp = () => {
         onChange={formik.handleChange}
         value={formik.values.email}
       />
-      {formik.errors.email && <div>{formik.errors.email}</div>}
+      {formik.errors.email && (
+        <div className={s.errorText}>{formik.errors.email}</div>
+      )}
 
       <label>Password</label>
       <input
+        placeholder="At least 6 characters"
         name="password"
         type="password"
         onChange={formik.handleChange}
         value={formik.values.password}
       />
-      {formik.errors.password && <div>{formik.errors.password}</div>}
-
-      <label>Copy Password</label>
+      {formik.errors.password && (
+        <div className={s.errorText}>{formik.errors.password}</div>
+      )}
+      <label>Re-enter password</label>
       <input
+        placeholder="At least 6 characters"
         name="copyPassword"
         type="password"
         onChange={formik.handleChange}
         value={formik.values.copyPassword}
       />
-      {formik.errors.copyPassword && <div>{formik.errors.copyPassword}</div>}
-
+      {formik.errors.copyPassword && (
+        <div className={s.errorText}>{formik.errors.copyPassword}</div>
+      )}
       <button type="submit">Submit</button>
     </form>
   );

@@ -1,5 +1,6 @@
 import { withZodSchema } from 'formik-validator-zod';
 import { useFormik } from 'formik';
+import s from './index.module.scss';
 import { z } from 'zod';
 
 const signUpSchema = z.object({
@@ -20,7 +21,7 @@ export const SignIn = () => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form className={s.form} onSubmit={formik.handleSubmit}>
       <label>Email Address</label>
       <input
         name="email"
@@ -28,7 +29,9 @@ export const SignIn = () => {
         onChange={formik.handleChange}
         value={formik.values.email}
       />
-      {formik.errors.email && <div>{formik.errors.email}</div>}
+      {formik.errors.email && (
+        <div className={s.errorText}>{formik.errors.email}</div>
+      )}
 
       <label>Password</label>
       <input
@@ -37,7 +40,9 @@ export const SignIn = () => {
         onChange={formik.handleChange}
         value={formik.values.password}
       />
-      {formik.errors.password && <div>{formik.errors.password}</div>}
+      {formik.errors.password && (
+        <div className={s.errorText}>{formik.errors.password}</div>
+      )}
       <button type="submit">Submit</button>
     </form>
   );

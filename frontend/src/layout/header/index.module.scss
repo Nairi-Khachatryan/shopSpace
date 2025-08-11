@@ -1,0 +1,17 @@
+header {
+  padding: 5px clamp(16px, 3vw, 32px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  background-color: gray;
+  height: 40px;
+}
+
+.header-container {
+  width: 100%;
+  // max-width: 1400px;
+  margin: 0 auto;
+  font-size: 1.8rem;
+}

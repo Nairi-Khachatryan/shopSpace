@@ -1,13 +1,13 @@
+import { NotFoundPage } from '../pages/notFoundPage/NotFoundPage';
 import { createBrowserRouter } from 'react-router-dom';
-import { AppLayout } from '../layout/AppLayout';
 import { ProtectedRoute } from './ProtectedRoute';
-import { Home } from '../pages/home';
 import { Create } from '../pages/createProduct';
-// import { SignIn } from '../auth/signIn';
-import { ROUTES } from './paths';
+import { AppLayout } from '../layout/AppLayout';
 import { Profile } from '../pages/userProfile';
 import { SignIn } from '../pages/auth/signIn';
 import { SignUp } from '../pages/auth/signUp';
+import { Home } from '../pages/home';
+import { ROUTES } from './paths';
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +25,10 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.SIGN_UP,
         element: <SignUp />,
+      },
+      {
+        path: ROUTES.NOT_FOUND_PATH,
+        element: <NotFoundPage />,
       },
       {
         element: <ProtectedRoute />,

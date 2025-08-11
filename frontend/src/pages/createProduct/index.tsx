@@ -2,7 +2,7 @@
 export const Create = () => {
   return (
     <div>
-      Create
+      on this page authorized user can create product
     </div>
   )
 }

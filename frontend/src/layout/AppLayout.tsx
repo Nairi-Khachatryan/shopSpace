@@ -1,6 +1,6 @@
-import { Header } from '../shared/header';
-import { Footer } from '../shared/footer';
 import { Outlet } from 'react-router-dom';
+import { Header } from './header';
+import { Footer } from './footer';
 import './appLayout.css';
 
 export const AppLayout = () => {
