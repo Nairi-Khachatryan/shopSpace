@@ -7,7 +7,46 @@
   flex-direction: column;
 }
 
+.linkNavigate {
+  color: white;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  margin: 20px;
+}
 
-.errorText{
+.myLink {
+  font-size: 2rem;
+  color: blue;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.submitBtn {
+  border: none;
+  width: 500px;
+  height: 50px;
+  color: white;
+  background-color: #3ce753;
+  border-radius: 10px;
+  font-size: 2rem;
+
+  &:hover {
+    text-decoration: underline;
+    background-color: #10b326;
+  }
+
+  &:active {
+    color: red;
+  }
+}
+
+.errorText {
   color: red;
 }

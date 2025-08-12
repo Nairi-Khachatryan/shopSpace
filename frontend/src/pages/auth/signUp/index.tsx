@@ -1,93 +1,74 @@
+import { registerUser } from '../../../features/user/usersThunk';
+import { initialValues, signUpSchema } from './validation';
 import { withZodSchema } from 'formik-validator-zod';
-import { useFormik } from 'formik';
-import { z } from 'zod';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../../app/hooks';
+import { useAppSelector } from '../../../app/hooks';
+import { FormInput } from '../../../shared/form';
+import { ROUTES } from '../../../routes/paths';
 import s from './signUp.module.scss';
-import { useState } from 'react';
-
-const signUpSchema = z
-  .object({
-    email: z.string().email('Invalid email'),
-    password: z.string().min(6, 'Min 6 chars'),
-    copyPassword: z.string(),
-  })
-  .refine((data) => data.password === data.copyPassword, {
-    message: "Passwords don't match",
-    path: ['copyPassword'],
-  });
+import { useFormik } from 'formik';
+import { useEffect } from 'react';
 
 export const SignUp = () => {
-  const [signUpStatus, setSignUpStatus] = useState({});
+  const isAuth = useAppSelector((state) => state.user.email);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  async function register(values) {
-    const { email, password } = values;
-
-    try {
-      const res = await fetch('http://localhost:5050/auth/signUp', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      setSignUpStatus(res);
-    } catch (error) {
-      if (error instanceof Error) {
-        console.log(error.message);
-      }
+  useEffect(() => {
+    if (isAuth) {
+      navigate('/');
     }
-  }
-
-  console.log(signUpStatus, 'signUpStatus');
+  }, [isAuth, navigate]);
 
   const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-      copyPassword: '',
-    },
+    initialValues: initialValues,
     validate: withZodSchema(signUpSchema),
     onSubmit: (values) => {
-      register(values);
+      const { email, password } = values;
+      dispatch(registerUser({ email, password }));
     },
   });
 
-  return (
-    <form className={s.form} onSubmit={formik.handleSubmit}>
-      <label>Email Address</label>
-      <input
-        name="email"
-        type="email"
-        onChange={formik.handleChange}
-        value={formik.values.email}
-      />
-      {formik.errors.email && (
-        <div className={s.errorText}>{formik.errors.email}</div>
-      )}
+  const { values, errors, handleChange, handleSubmit } = formik;
 
-      <label>Password</label>
-      <input
-        placeholder="At least 6 characters"
-        name="password"
-        type="password"
-        onChange={formik.handleChange}
-        value={formik.values.password}
-      />
-      {formik.errors.password && (
-        <div className={s.errorText}>{formik.errors.password}</div>
-      )}
-      <label>Re-enter password</label>
-      <input
-        placeholder="At least 6 characters"
-        name="copyPassword"
-        type="password"
-        onChange={formik.handleChange}
-        value={formik.values.copyPassword}
-      />
-      {formik.errors.copyPassword && (
-        <div className={s.errorText}>{formik.errors.copyPassword}</div>
-      )}
-      <button type="submit">Submit</button>
-    </form>
+  return (
+    <>
+      <form className={s.form} onSubmit={handleSubmit}>
+        <FormInput
+          label="Email Address"
+          name="email"
+          type="email"
+          value={values.email}
+          onChange={handleChange}
+          error={errors.email}
+        />
+        <FormInput
+          label="Password"
+          name="password"
+          type="password"
+          value={values.password}
+          onChange={handleChange}
+          error={errors.password}
+        />
+        <FormInput
+          label="Re-enter password"
+          name="copyPassword"
+          type="password"
+          value={values.copyPassword}
+          onChange={handleChange}
+          error={errors.copyPassword}
+        />
+        <div className={s.linkNavigate}>
+          <h1>New to Shop Space?</h1>
+          <Link className={s.myLink} to={ROUTES.SIGN_IN}>
+            Sign Up
+          </Link>
+        </div>
+        <button type="submit" className={s.submitBtn}>
+          Sign Up
+        </button>
+      </form>
+    </>
   );
 };

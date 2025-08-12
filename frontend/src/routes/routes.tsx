@@ -8,6 +8,8 @@ import { SignIn } from '../pages/auth/signIn';
 import { SignUp } from '../pages/auth/signUp';
 import { Home } from '../pages/home';
 import { ROUTES } from './paths';
+import { AdminRoutes } from './AdminRoutes';
+import { AdminProductsPage } from '../pages/adminProductsPage';
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +31,14 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.NOT_FOUND_PATH,
         element: <NotFoundPage />,
+      },
+      {
+        path: ROUTES.ADMIN_PRODUCTS,
+        element: (
+          <AdminRoutes>
+            <AdminProductsPage />
+          </AdminRoutes>
+        ),
       },
       {
         element: <ProtectedRoute />,
