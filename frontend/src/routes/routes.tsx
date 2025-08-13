@@ -1,15 +1,14 @@
-import { NotFoundPage } from '../pages/notFoundPage/NotFoundPage';
+import { NotFoundPage } from '../components/notFound/NotFoundPage';
+import { CreateProduct } from '../components/createProduct';
 import { createBrowserRouter } from 'react-router-dom';
 import { ProtectedRoute } from './ProtectedRoute';
-import { Create } from '../pages/createProduct';
 import { AppLayout } from '../layout/AppLayout';
-import { Profile } from '../pages/userProfile';
 import { SignIn } from '../pages/auth/signIn';
 import { SignUp } from '../pages/auth/signUp';
+import { AdminRoutes } from './AdminRoutes';
+import { Profile } from '../pages/profile';
 import { Home } from '../pages/home';
 import { ROUTES } from './paths';
-import { AdminRoutes } from './AdminRoutes';
-import { AdminProductsPage } from '../pages/adminProductsPage';
 
 export const router = createBrowserRouter([
   {
@@ -36,17 +35,13 @@ export const router = createBrowserRouter([
         path: ROUTES.ADMIN_PRODUCTS,
         element: (
           <AdminRoutes>
-            <AdminProductsPage />
+            <CreateProduct />
           </AdminRoutes>
         ),
       },
       {
         element: <ProtectedRoute />,
         children: [
-          {
-            path: ROUTES.CREATE,
-            element: <Create />,
-          },
           {
             path: ROUTES.PROFILE,
             element: <Profile />,

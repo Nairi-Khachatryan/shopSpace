@@ -1,17 +1,91 @@
-header {
-  padding: 5px clamp(16px, 3vw, 32px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  position: sticky;
+.header-light {
   top: 0;
+  color: white;
   z-index: 1000;
-  transition: all 0.3s ease;
-  background-color: gray;
-  height: 40px;
+  height: 100px;
+  display: flex;
+  position: sticky;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(16px, 3vw, 32px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #2a5298, #1e3c72);
 }
 
-.header-container {
-  width: 100%;
-  // max-width: 1400px;
-  margin: 0 auto;
-  font-size: 1.8rem;
+.header-dark {
+  top: 0;
+  color: white;
+  z-index: 1000;
+  height: 100px;
+  display: flex;
+  position: sticky;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(16px, 3vw, 32px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #2a5298, black);
+}
+
+.buttonsContainer {
+  width: 300px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.logo-dark {
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.985);
+  user-select: none;
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  cursor: pointer;
+  color: black;
+}
+
+.logo-light {
+  box-shadow: 0 4px 10px rgba(5, 70, 155, 0.985);
+  user-select: none;
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  cursor: pointer;
+}
+
+.themeBtn {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.cart {
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  user-select: none;
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-right: 10px;
+
+  &:hover {
+    background: rgba(14, 178, 228, 0.1);
+  }
+
+  &.signInBtn {
+    margin-right: 8px;
+  }
+  &:active {
+    color: rgb(39, 102, 220);
+  }
 }

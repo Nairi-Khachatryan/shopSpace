@@ -1,14 +1,9 @@
-$white: #fff;
-$black: #000;
-$blue: #00c;
-$red: #c00;
-$gray: #ccc;
-$grayLight: #eee;
+// :global(.light-theme) {
+//   --bg-gradient: linear-gradient(135deg, #f1f4ff 1%, #2a5298 100%);
+//   --text-color: black;
+// }
 
-$defaultFontFamily: 'Helvetica', 'Arial', sans-serif;
-$defaultFontSize: 14px;
-$defaultBackgroundColor: $white;
-$defaultTextColor: $black;
-$defaultLineHeight: 1.2;
-
-$borderRadiusSmall: 3px;
+// :global(.dark-theme) {
+//   --bg-gradient: linear-gradient(110deg, #374b69 1%, black 100%);
+//   --text-color: wheat;
+// }

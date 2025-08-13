@@ -3,17 +3,19 @@ import { initialValues, signUpSchema } from './validation';
 import { withZodSchema } from 'formik-validator-zod';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../app/hooks';
-import { useAppSelector } from '../../../app/hooks';
+import { useTheme } from '../../../hooks/useTheme';
 import { FormInput } from '../../../shared/form';
+import { useAuth } from '../../../hooks/useAuth';
 import { ROUTES } from '../../../routes/paths';
 import s from './signUp.module.scss';
 import { useFormik } from 'formik';
 import { useEffect } from 'react';
 
 export const SignUp = () => {
-  const isAuth = useAppSelector((state) => state.user.email);
-  const dispatch = useAppDispatch();
+  const isAuth = useAuth();
+  const { theme } = useTheme();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (isAuth) {
@@ -24,6 +26,7 @@ export const SignUp = () => {
   const formik = useFormik({
     initialValues: initialValues,
     validate: withZodSchema(signUpSchema),
+
     onSubmit: (values) => {
       const { email, password } = values;
       dispatch(registerUser({ email, password }));
@@ -34,7 +37,7 @@ export const SignUp = () => {
 
   return (
     <>
-      <form className={s.form} onSubmit={handleSubmit}>
+      <form className={`${s[`form-${theme}`]}`} onSubmit={handleSubmit}>
         <FormInput
           label="Email Address"
           name="email"
@@ -60,9 +63,9 @@ export const SignUp = () => {
           error={errors.copyPassword}
         />
         <div className={s.linkNavigate}>
-          <h1>New to Shop Space?</h1>
+          <h1> Already have an account?</h1>
           <Link className={s.myLink} to={ROUTES.SIGN_IN}>
-            Sign Up
+            Sign In
           </Link>
         </div>
         <button type="submit" className={s.submitBtn}>

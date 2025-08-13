@@ -55,10 +55,10 @@ export const signIn = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       success: true,
-      message: 'User created successfully',
-      email: candidate.email,
       id: candidate._id,
+      email: candidate.email,
       isAdmin: candidate.isAdmin,
+      message: 'User logged in successfully',
     });
   } catch (error) {
     console.log(error instanceof Error ? error.message : error);

@@ -1,10 +1,21 @@
-.form {
+.form-light {
+  width: 100vw;
+  height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: linear-gradient(135deg, #7a94e2 1%, #2a5298 100%);
+}
+
+.form-dark {
   height: 100vh;
   width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
+  background: linear-gradient(135deg, #2a5298, black);
 }
 
 .submitBtn {
@@ -12,34 +23,33 @@
   width: 500px;
   height: 50px;
   color: white;
-  background-color: #3ce753;
-  border-radius: 10px;
   font-size: 2rem;
+  border-radius: 10px;
+  background-color: #2e10c6;
 
   &:hover {
-    text-decoration: underline;
-    background-color: #10b326;
+    background-color: #084bbf;
   }
 
   &:active {
-    color: red;
+    color: #084bbf;
   }
 }
 
 .linkNavigate {
+  margin: 20px;
   color: white;
   padding: 10px;
   display: flex;
-  flex-direction: column;
   flex-wrap: wrap;
+  flex-direction: column;
   align-content: center;
   align-items: center;
-  margin: 20px;
 }
 
 .myLink {
-  font-size: 2rem;
   color: blue;
+  font-size: 2rem;
   text-decoration: none;
 
   &:hover {

@@ -1,6 +1,19 @@
-footer {
-  height: 10px;
-  padding: 60px 20px 30px;
-  transition: background-color 0.3s, color 0.3s;
-  background-color: gray;
+.footer-light {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 50px;
+  background: linear-gradient(135deg, #2a5298, #1e3c72);
+  color: white;
+}
+
+.footer-dark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 50px;
+  background: linear-gradient(135deg, #2a5298, black);
+  color: white;
 }

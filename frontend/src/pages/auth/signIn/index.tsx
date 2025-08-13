@@ -1,7 +1,8 @@
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { signInUser } from '../../../features/user/usersThunk';
+import { useAppDispatch } from '../../../app/hooks';
 import { withZodSchema } from 'formik-validator-zod';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../hooks/useAuth';
 import { FormInput } from '../../../shared/form';
 import { ROUTES } from '../../../routes/paths';
 import { initialValues } from './validation';
@@ -9,11 +10,13 @@ import { signInSchema } from './validation';
 import { useFormik } from 'formik';
 import s from './index.module.scss';
 import { useEffect } from 'react';
+import { useTheme } from '../../../hooks/useTheme';
 
 export const SignIn = () => {
-  const navigate = useNavigate();
-  const isAuth = useAppSelector((state) => state.user.email);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const isAuth = useAuth();
+  const { theme } = useTheme();
 
   useEffect(() => {
     if (isAuth) {
@@ -33,32 +36,32 @@ export const SignIn = () => {
   const { handleChange, values, errors } = formik;
 
   return (
-    <form className={s.form} onSubmit={formik.handleSubmit}>
+    <form className={`${s[`form-${theme}`]}`} onSubmit={formik.handleSubmit}>
       <FormInput
-        label="Email"
         name="email"
         type="email"
-        onChange={handleChange}
+        label="Email"
         value={values.email}
         error={errors.email}
+        onChange={handleChange}
       />
       <FormInput
-        label="Password"
         name="password"
         type="password"
-        onChange={formik.handleChange}
+        label="Password"
         value={values.password}
         error={errors.password}
+        onChange={formik.handleChange}
       />
 
       <div className={s.linkNavigate}>
-        <h1> Already have an account?</h1>
+        <h1>New to Shop Space?</h1>
         <Link className={s.myLink} to={ROUTES.SIGN_UP}>
-          Sign In
+          Sign Up
         </Link>
       </div>
       <button className={s.submitBtn} type="submit">
-        Submit
+        Sign In
       </button>
     </form>
   );

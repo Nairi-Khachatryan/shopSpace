@@ -18,7 +18,7 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    removeUser: (state) => {
+    logOutUser: (state) => {
       state.email = null;
       state.id = null;
       state.isAdmin = false;
@@ -40,5 +40,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { removeUser } = userSlice.actions;
+export const { logOutUser } = userSlice.actions;
 export default userSlice.reducer;
