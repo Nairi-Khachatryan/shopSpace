@@ -40,3 +40,13 @@ export const getAllProducts = async () => {
   const json = await res.json();
   return json.data;
 };
+
+export const deleteProduct = async (id: string) => {
+  const res = fetch(`http://localhost:5050/products/${id}`, {
+    method: 'DELETE',
+  });
+
+  return res;
+};
+
+export const updateProduct = async (id: string) => {};

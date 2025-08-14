@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import { useTheme } from '../../../hooks/useTheme';
 import { FormInput } from '../../../shared/form';
 import s from './updateProduct.module.scss';
@@ -5,12 +6,16 @@ import { useFormik } from 'formik';
 
 export const UpdateProduct = () => {
   const { theme } = useTheme();
+  const location = useLocation();
+
+  const { name, _id, category, description, price, image } = location.state;
+
   const initialValues = {
-    name: '',
-    price: '',
-    image: '',
-    category: '',
-    description: '',
+    name: name || '',
+    price: price || '',
+    image: image || '',
+    category: category || '',
+    description: description || '',
   };
 
   const formik = useFormik({

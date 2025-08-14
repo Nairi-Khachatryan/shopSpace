@@ -1,6 +1,6 @@
 export type Product = {
   isAdmin: boolean;
-  _id?: string;
+  _id: string;
   name: string;
   price: number;
   category: string;

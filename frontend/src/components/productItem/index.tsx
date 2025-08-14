@@ -1,3 +1,4 @@
+import { deleteProduct } from '../../features/products/productThunk';
 import type { Product } from '../../pages/home/types';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../routes/paths';
@@ -10,6 +11,11 @@ type Props = {
 
 export const ProductItem: React.FC<Props> = ({ product, isAdmin }: Props) => {
   const navigate = useNavigate();
+
+  function handleDeleteProduct(id: string) {
+    deleteProduct(id);
+  }
+
   const { name, price, description, category, _id, image } = product;
 
   return (
@@ -29,8 +35,16 @@ export const ProductItem: React.FC<Props> = ({ product, isAdmin }: Props) => {
       {image && <img src={image} alt={name} style={{ maxWidth: 150 }} />}
       {isAdmin && (
         <>
-          <button>Delete</button>
-          <button onClick={() => navigate(ROUTES.ADMIN_UPDATES)}>Update</button>
+          <button onClick={() => handleDeleteProduct(_id)}>Delete</button>
+          <button
+            onClick={() =>
+              navigate(ROUTES.ADMIN_UPDATES, {
+                state: { name, _id, description, category, image, price },
+              })
+            }
+          >
+            Update
+          </button>
         </>
       )}
     </div>

@@ -9,15 +9,15 @@ import React from 'react';
 export const Home: React.FC = () => {
   const isAdmin = useIsAdmin();
 
-  console.log(isAdmin, 'isAdmin');
+  // console.log(isAdmin, 'isAdmin');
   const { theme } = useTheme();
   const { data, error, isSuccess } = useQuery({
     queryKey: ['products'],
     queryFn: getAllProducts,
   });
 
-  console.log(error, 'error');
-  console.log(isSuccess, 'isSuc');
+  // console.log(error, 'error');
+  // console.log(isSuccess, 'isSuc');
 
   interface Product {
     isAdmin: boolean;
