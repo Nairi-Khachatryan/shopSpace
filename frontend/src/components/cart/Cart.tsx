@@ -1,10 +1,5 @@
-import React from 'react'
+
 
 export const Cart = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
-
+  return <div>Here Will Be User Cart</div>;
+};

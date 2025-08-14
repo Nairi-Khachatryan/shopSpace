@@ -1,0 +1,17 @@
+.container-light {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(135deg, #7a94e2 1%, #2a5298 100%);
+}
+
+.container-dark {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(135deg, #2a5298, black);
+}

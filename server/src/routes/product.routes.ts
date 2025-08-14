@@ -7,12 +7,12 @@ import {
 } from '../controllers/product.controllers.ts';
 import express from 'express';
 
-export const router = express.Router();
+export const productRouter = express.Router();
 
-router.get('/', getAllProducts);
-router.get('/:id', getSingleProducts);
+productRouter.get('/', getAllProducts);
+productRouter.get('/:id', getSingleProducts);
 
-router.post('/', createProducts);
-router.put('/:id', updateProducts);
+productRouter.post('/admin', createProducts);
+productRouter.put('/:id', updateProducts);
 
-router.delete('/:id', deleteProducts);
+productRouter.delete('/:id', deleteProducts);

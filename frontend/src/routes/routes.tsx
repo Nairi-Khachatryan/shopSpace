@@ -1,5 +1,5 @@
 import { NotFoundPage } from '../components/notFound/NotFoundPage';
-import { CreateProduct } from '../components/createProduct';
+import { CreateProduct } from '../components/admin/createProduct';
 import { createBrowserRouter } from 'react-router-dom';
 import { ProtectedRoute } from './ProtectedRoute';
 import { AppLayout } from '../layout/AppLayout';
@@ -9,6 +9,7 @@ import { AdminRoutes } from './AdminRoutes';
 import { Profile } from '../pages/profile';
 import { Home } from '../pages/home';
 import { ROUTES } from './paths';
+import { UpdateProduct } from '../components/admin/updateProduct';
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoutes>
             <CreateProduct />
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: ROUTES.ADMIN_UPDATES,
+        element: (
+          <AdminRoutes>
+            <UpdateProduct />
           </AdminRoutes>
         ),
       },

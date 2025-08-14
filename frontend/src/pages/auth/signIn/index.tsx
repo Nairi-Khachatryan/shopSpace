@@ -2,6 +2,7 @@ import { signInUser } from '../../../features/user/usersThunk';
 import { useAppDispatch } from '../../../app/hooks';
 import { withZodSchema } from 'formik-validator-zod';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTheme } from '../../../hooks/useTheme';
 import { useAuth } from '../../../hooks/useAuth';
 import { FormInput } from '../../../shared/form';
 import { ROUTES } from '../../../routes/paths';
@@ -10,7 +11,6 @@ import { signInSchema } from './validation';
 import { useFormik } from 'formik';
 import s from './index.module.scss';
 import { useEffect } from 'react';
-import { useTheme } from '../../../hooks/useTheme';
 
 export const SignIn = () => {
   const dispatch = useAppDispatch();

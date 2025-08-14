@@ -1,8 +1,10 @@
-import React from 'react'
+import { useTheme } from '../../hooks/useTheme'
+import s from './Profile.module.scss'
 
 export const Profile = () => {
+  const {theme} = useTheme()
   return (
-    <div>
+    <div className={`${s[`container-${theme}`]}`}>
       Profile
     </div>
   )

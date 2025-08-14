@@ -11,7 +11,6 @@ export const AdminRoutes = ({ children }: AdminRouteProps) => {
   const isAdmin = useAppSelector((state) => state.user.isAdmin);
   const navigate = useNavigate();
 
-  console.log(isAdmin, 'isadmin');
 
   useEffect(() => {
     

@@ -5,5 +5,7 @@ export const ROUTES = {
   NOT_FOUND_PATH: '*',
   PROFILE: '/profile',
   CREATE: '/create-product',
-  ADMIN_PRODUCTS: '/admin/products'
+  ADMIN_PRODUCTS: '/admin/products',
+  ADMIN_UPDATES: '/admin/updates',
+  ADMIN_EDIT: 'admin/edit'
 } as const;
