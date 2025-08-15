@@ -10,12 +10,14 @@ import { ROUTES } from '../../../routes/paths';
 import s from './signUp.module.scss';
 import { useFormik } from 'formik';
 import { useEffect } from 'react';
+import { useToast } from '../../../hooks/useToast';
 
 export const SignUp = () => {
   const isAuth = useAuth();
   const { theme } = useTheme();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { showToast } = useToast();
 
   useEffect(() => {
     if (isAuth) {
@@ -27,9 +29,16 @@ export const SignUp = () => {
     initialValues: initialValues,
     validate: withZodSchema(signUpSchema),
 
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       const { email, password } = values;
-      dispatch(registerUser({ email, password }));
+      const res = await dispatch(registerUser({ email, password })).unwrap();
+
+      if (!res.success) {
+        return showToast({ type: 'error', message: res.message });
+      }
+
+      showToast({ type: 'success', message: res.message });
+      navigate(ROUTES.HOME_PATH);
     },
   });
 
@@ -39,27 +48,27 @@ export const SignUp = () => {
     <>
       <form className={`${s[`form-${theme}`]}`} onSubmit={handleSubmit}>
         <FormInput
-          label="Email Address"
           name="email"
           type="email"
-          value={values.email}
-          onChange={handleChange}
           error={errors.email}
+          value={values.email}
+          label="Email Address"
+          onChange={handleChange}
         />
         <FormInput
-          label="Password"
           name="password"
           type="password"
+          label="Password"
           value={values.password}
           onChange={handleChange}
           error={errors.password}
         />
         <FormInput
-          label="Re-enter password"
-          name="copyPassword"
           type="password"
-          value={values.copyPassword}
+          name="copyPassword"
           onChange={handleChange}
+          label="Re-enter password"
+          value={values.copyPassword}
           error={errors.copyPassword}
         />
         <div className={s.linkNavigate}>

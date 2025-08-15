@@ -3,6 +3,7 @@ import { useAppDispatch } from '../../../app/hooks';
 import { withZodSchema } from 'formik-validator-zod';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTheme } from '../../../hooks/useTheme';
+import { useToast } from '../../../hooks/useToast';
 import { useAuth } from '../../../hooks/useAuth';
 import { FormInput } from '../../../shared/form';
 import { ROUTES } from '../../../routes/paths';
@@ -17,6 +18,7 @@ export const SignIn = () => {
   const navigate = useNavigate();
   const isAuth = useAuth();
   const { theme } = useTheme();
+  const { showToast } = useToast();
 
   useEffect(() => {
     if (isAuth) {
@@ -27,9 +29,16 @@ export const SignIn = () => {
   const formik = useFormik({
     initialValues: initialValues,
     validate: withZodSchema(signInSchema),
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       const { email, password } = values;
-      dispatch(signInUser({ email, password }));
+      const res = await dispatch(signInUser({ email, password })).unwrap();
+
+      if (!res.success) {
+        return showToast({ type: 'error', message: res.message });
+      }
+
+      showToast({ type: 'success', message: res.message });
+      navigate(ROUTES.HOME_PATH);
     },
   });
 

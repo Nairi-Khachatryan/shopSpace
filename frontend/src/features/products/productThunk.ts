@@ -6,6 +6,19 @@ type ReqBody = {
   image: string;
 };
 
+
+type UpdateProductResponse = {
+  success: boolean;
+  message: string;
+  data: {
+    name: string;
+    price: number;
+    image: string;
+    category: string;
+    description: string;
+  };
+};
+
 export const createProduct = async (reqBody: ReqBody) => {
   const bodyToSend = { ...reqBody, price: +reqBody.price };
 
@@ -49,18 +62,15 @@ export const deleteProduct = async (id: string) => {
   return res;
 };
 
-export const updateProduct = async (id: string, reqBody: ReqBody) => {
+export const updateProduct = async (
+  id: string,
+  reqBody: ReqBody
+): Promise<UpdateProductResponse> => {
   const res = await fetch(`http://localhost:5050/products/${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(reqBody),
   });
 
-  return (await res.json()) as {
-    name: string;
-    price: number;
-    image: string;
-    category: string;
-    description: string;
-  };
+  return await res.json();
 };

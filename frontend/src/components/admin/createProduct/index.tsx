@@ -20,8 +20,10 @@ export const CreateProduct = () => {
   const formik = useFormik({
     initialValues,
     onSubmit: (values, { resetForm }) => {
-      createProduct(values);
+      const res = createProduct(values);
       resetForm();
+
+      console.log(res, 'res need add show toast');
     },
   });
 

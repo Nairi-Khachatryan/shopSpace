@@ -1,5 +1,23 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+type RegisterUserResponse = {
+  success: boolean;
+  message: string;
+  data?: {
+    email: string;
+    id: string;
+    isAdmin: boolean;
+  };
+};
+
+type SignInUserResponse = {
+  success: boolean;
+  message: string;
+  email: string;
+  id: string;
+  isAdmin: boolean;
+};
+
 export const registerUser = createAsyncThunk(
   'user/registerUser',
   async ({ email, password }: { email: string; password: string }) => {
@@ -9,15 +27,7 @@ export const registerUser = createAsyncThunk(
       body: JSON.stringify({ email, password }),
     });
 
-    if (!res.ok) {
-      throw new Error('Registration failed');
-    }
-
-    return (await res.json()) as {
-      email: string;
-      id: string;
-      isAdmin: boolean;
-    };
+    return (await res.json()) as RegisterUserResponse;
   }
 );
 
@@ -30,14 +40,6 @@ export const signInUser = createAsyncThunk(
       body: JSON.stringify({ email, password }),
     });
 
-    if (!res.ok) {
-      throw new Error('Sign In failed');
-    }
-
-    return (await res.json()) as {
-      email: string;
-      id: string;
-      isAdmin: boolean;
-    };
+    return (await res.json()) as SignInUserResponse;
   }
 );

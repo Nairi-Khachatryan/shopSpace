@@ -27,15 +27,18 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.fulfilled, (state, action) => {
-        console.log(action.payload, 'pay');
-        state.email = action.payload.email;
-        state.id = action.payload.id;
-        state.isAdmin = action.payload.isAdmin;
+        if (action.payload.data) {
+          state.email = action.payload.data.email;
+          state.id = action.payload.data.id;
+          state.isAdmin = action.payload.data.isAdmin;
+        }
       })
       .addCase(signInUser.fulfilled, (state, action) => {
-        state.email = action.payload.email;
-        state.id = action.payload.id;
-        state.isAdmin = action.payload.isAdmin;
+        if (action.payload) {
+          state.email = action.payload.email;
+          state.id = action.payload.id;
+          state.isAdmin = action.payload.isAdmin;
+        }
       });
   },
 });
