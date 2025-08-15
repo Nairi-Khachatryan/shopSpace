@@ -49,4 +49,18 @@ export const deleteProduct = async (id: string) => {
   return res;
 };
 
-export const updateProduct = async (id: string) => {};
+export const updateProduct = async (id: string, reqBody: ReqBody) => {
+  const res = await fetch(`http://localhost:5050/products/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(reqBody),
+  });
+
+  return (await res.json()) as {
+    name: string;
+    price: number;
+    image: string;
+    category: string;
+    description: string;
+  };
+};

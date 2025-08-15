@@ -31,7 +31,7 @@ export const Home: React.FC = () => {
 
   return (
     <div className={theme === 'light' ? s.homeLight : s.homeDark}>
-      <div>
+      <div className={s.productsGrid}>
         {data?.length ? (
           data.map((product: Product) => (
             <ProductItem

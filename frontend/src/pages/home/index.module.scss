@@ -1,9 +1,36 @@
+// .homeLight {
+//   background: linear-gradient(135deg, #f1f4ff 1%, #2a5298 100%);
+//   height: 100vh;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+
+// }
+// .homeDark {
+//   background: linear-gradient(110deg, #374b69 1%, black 100%);
+//   color: wheat;
+//   height: 100vh;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+
 .homeLight {
   background: linear-gradient(135deg, #f1f4ff 1%, #2a5298 100%);
-  height: 100vh;
+  color: #222;
+  min-height: 100vh;
+  padding: 20px;
 }
+
 .homeDark {
   background: linear-gradient(110deg, #374b69 1%, black 100%);
-  color: wheat;
-  height: 100vh;
+  color: #fff;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
 }

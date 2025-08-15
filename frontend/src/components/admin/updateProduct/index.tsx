@@ -1,12 +1,16 @@
-import { useLocation } from 'react-router-dom';
+import { updateProduct } from '../../../features/products/productThunk';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useTheme } from '../../../hooks/useTheme';
 import { FormInput } from '../../../shared/form';
+import { ROUTES } from '../../../routes/paths';
 import s from './updateProduct.module.scss';
 import { useFormik } from 'formik';
+import lodash from 'lodash';
 
 export const UpdateProduct = () => {
   const { theme } = useTheme();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const { name, _id, category, description, price, image } = location.state;
 
@@ -21,8 +25,15 @@ export const UpdateProduct = () => {
   const formik = useFormik({
     initialValues,
     onSubmit: (values, { resetForm }) => {
-      // createProduct(values);
+      const isSameValue = lodash.isEqual(values, initialValues);
+
+      if (isSameValue) {
+        return;
+      }
+
+      updateProduct(_id, values);
       resetForm();
+      navigate(ROUTES.HOME_PATH, { state: { message: 'redirect' } });
     },
   });
 
