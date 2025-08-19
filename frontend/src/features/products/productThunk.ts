@@ -6,7 +6,6 @@ type ReqBody = {
   image: string;
 };
 
-
 type UpdateProductResponse = {
   success: boolean;
   message: string;
@@ -19,7 +18,19 @@ type UpdateProductResponse = {
   };
 };
 
-export const createProduct = async (reqBody: ReqBody) => {
+type CreateProductResponse = {
+  success: boolean;
+  message: string;
+  data?: {
+    name: string;
+    price: number;
+    image: string;
+    category: string;
+    description: string;
+  };
+};
+
+export const createProduct = async (reqBody: ReqBody):Promise<CreateProductResponse>  => {
   const bodyToSend = { ...reqBody, price: +reqBody.price };
 
   const res = await fetch('http://localhost:5050/products/admin', {
@@ -32,13 +43,15 @@ export const createProduct = async (reqBody: ReqBody) => {
     throw new Error('Product Creation failed');
   }
 
-  return (await res.json()) as {
-    name: string;
-    price: number;
-    image: string;
-    category: string;
-    description: string;
-  };
+  return await res.json();
+
+  // return (await res.json()) as {
+  //   name: string;
+  //   price: number;
+  //   image: string;
+  //   category: string;
+  //   description: string;
+  // };
 };
 
 export const getAllProducts = async () => {

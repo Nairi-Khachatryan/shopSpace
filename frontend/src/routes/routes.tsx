@@ -10,6 +10,7 @@ import { AdminRoutes } from './AdminRoutes';
 import { Profile } from '../pages/profile';
 import { Home } from '../pages/home';
 import { ROUTES } from './paths';
+import { ProdItemMoreInfo } from '../components/prodItemMoreInfo/ProdItemMoreInfo';
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.NOT_FOUND_PATH,
         element: <NotFoundPage />,
+      },
+      {
+        path: ROUTES.PRODUCT_ITEM_PREVUE,
+        element: <ProdItemMoreInfo />,
       },
       {
         path: ROUTES.ADMIN_PRODUCTS,

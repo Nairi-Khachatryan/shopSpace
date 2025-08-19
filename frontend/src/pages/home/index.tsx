@@ -6,6 +6,7 @@ import { useTheme } from '../../hooks/useTheme';
 import type { Product } from './interfaces';
 import s from './index.module.scss';
 import React from 'react';
+// import { storageService } from '../../utils/storageService';
 
 export const Home: React.FC = () => {
   const isAdmin = useIsAdmin();
@@ -16,8 +17,11 @@ export const Home: React.FC = () => {
     queryFn: getAllProducts,
   });
 
-  console.log(error, 'error');
-  console.log(isSuccess, 'isSuc');
+  // console.log(error, 'error');
+  // console.log(isSuccess, 'isSuc');
+
+
+  // storageService.setItem()
 
   return (
     <div className={theme === 'light' ? s.homeLight : s.homeDark}>

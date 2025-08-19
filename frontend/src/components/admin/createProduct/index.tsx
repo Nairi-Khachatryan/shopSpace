@@ -1,14 +1,16 @@
 import { createProduct } from '../../../features/products/productThunk';
-import { useNavigate } from 'react-router-dom';
+import { useToast } from '../../../hooks/useToast';
 import { useTheme } from '../../../hooks/useTheme';
-import { ROUTES } from '../../../routes/paths';
 import { FormInput } from '../../../shared/form';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../../routes/paths';
 import s from './createProduct.module.scss';
 import { useFormik } from 'formik';
 
 export const CreateProduct = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
+  const { showToast } = useToast();
   const initialValues = {
     name: '',
     price: '',
@@ -19,11 +21,17 @@ export const CreateProduct = () => {
 
   const formik = useFormik({
     initialValues,
-    onSubmit: (values, { resetForm }) => {
-      const res = createProduct(values);
-      resetForm();
-
-      console.log(res, 'res need add show toast');
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        await createProduct(values);
+        showToast({ type: 'success', message: 'product created successfully' });
+        resetForm();
+        navigate(ROUTES.HOME_PATH);
+      } catch (error) {
+        if (error instanceof Error) {
+          showToast({ type: 'error', message: error.message });
+        }
+      }
     },
   });
 

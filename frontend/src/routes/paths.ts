@@ -7,5 +7,6 @@ export const ROUTES = {
   CREATE: '/create-product',
   ADMIN_PRODUCTS: '/admin/products',
   ADMIN_UPDATES: '/admin/updates',
-  ADMIN_EDIT: 'admin/edit'
+  ADMIN_EDIT: 'admin/edit',
+  PRODUCT_ITEM_PREVUE: '/product-item-prevue'
 } as const;

@@ -1,11 +1,12 @@
 .card {
-  display: flex;
-  flex-direction: column;
   height: 100%;
+  padding: 16px;
+  display: flex;
+  cursor: pointer;
+  border-radius: 14px;
+  flex-direction: column;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: 14px;
-  padding: 16px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 
@@ -43,7 +44,6 @@
   line-height: 1.4;
   color: var(--muted);
   margin: 0 0 8px;
-  /* обрезка длинного описания, если нужно */
   display: -webkit-box;
   -webkit-line-clamp: 1;
   line-clamp: 2;

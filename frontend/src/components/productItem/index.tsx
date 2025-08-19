@@ -1,51 +1,75 @@
 import { deleteProduct } from '../../features/products/productThunk';
-import type { Product } from '../../pages/home/types';
+import { storageService } from '../../utils/storageService';
+import { ConfirmPop } from '../../shared/modal/ConfirmPop';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../routes/paths';
-import React from 'react';
-
-type Props = {
-  product: Product;
-  isAdmin: boolean;
-};
-
+import { useAuth } from '../../hooks/useAuth';
 import s from './productItem.module.scss';
+import type { Props } from './types';
+import React from 'react';
 
 export const ProductItem: React.FC<Props> = ({ product, isAdmin }) => {
   const navigate = useNavigate();
+  const isAuth = useAuth();
+
+  type Product = {
+    name: string;
+    price: number;
+    description: string;
+    category: string;
+    image: string;
+    _id: string;
+    qty: number;
+  };
+
+  function handleAddToBasket(product: Product) {
+    if (!isAuth) {
+      storageService.setItem(product);
+    }
+  }
 
   function handleDeleteProduct(id: string) {
     deleteProduct(id);
   }
   const { _id, name, price, description, category, image } = product;
 
+  const handleProductPrevue = () => {
+    navigate(ROUTES.PRODUCT_ITEM_PREVUE, {
+      state: { _id, name, price, description, category, image },
+    });
+  };
+
   return (
     <article className={s.card}>
-      <h3 className={s.title}>
-        {name} — <span className={s.price}>{price}$</span>
-      </h3>
-
-      {image && (
-        <div className={s.media}>
-          <img src={image} alt={name} />
-        </div>
-      )}
-
-      <p className={s.desc}>{description}</p>
-      <p className={s.meta}>Category: {category}</p>
-
+      <div onClick={handleProductPrevue}>
+        <h3 className={s.title}>
+          {name} — <span className={s.price}>{price}$</span>
+        </h3>
+        {image && (
+          <div className={s.media}>
+            <img src={image} alt={name} />
+          </div>
+        )}
+        <p className={s.desc}>{description}</p>
+        <p className={s.meta}>Category: {category}</p>
+      </div>
       {!isAdmin ? (
         <>
-          <button className={s.addCard}>Add To Card</button>
+          <button
+            onClick={() => handleAddToBasket(product)}
+            className={s.addCard}
+          >
+            Add To Card
+          </button>
         </>
       ) : (
         <div className={s.actions}>
-          <button
-            className={`${s.btn} ${s.deleteBtn}`}
-            onClick={() => handleDeleteProduct(_id)}
+          <ConfirmPop
+            title="Are you sure you want to delete this product?"
+            onConfirm={() => handleDeleteProduct(_id)}
           >
-            Delete
-          </button>
+            <button className={`${s.btn} ${s.deleteBtn}`}>Delete</button>
+          </ConfirmPop>
           <button
             className={`${s.btn} ${s.updateBtn}`}
             onClick={() =>
