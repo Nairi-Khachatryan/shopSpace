@@ -1,5 +1,5 @@
 import { Cart } from '../../../components/cart/Cart';
-import { Basket } from '../basket/Basket';
+import {  BasketIcon } from '../basketIcon/BasketIcon';
 import { useState } from 'react';
 import { Modal } from 'antd';
 
@@ -9,7 +9,7 @@ export const CartModalTrigger = ({ theme }: { theme: string }) => {
   return (
     <>
       <div className="cart" onClick={() => setOpen(true)}>
-        <Basket theme={theme} />
+        <BasketIcon theme={theme} />
       </div>
       <Modal
         title="Cart"

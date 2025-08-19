@@ -1,29 +1,45 @@
-import { storageService } from '../../utils/storageService';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import type { Product } from '../../pages/home/types';
+import {
+  addToCart,
+  removeFromCart,
+  selectCartItems,
+} from '../../features/cart/cartSlice';
+import s from './cart.module.scss';
 
 export const Cart = () => {
-  const data = storageService.getItem();
+  const dispatch = useAppDispatch();
+  const items = useAppSelector(selectCartItems);
 
-  type Product = {
-    name: string;
-    price: number;
-    image: string;
-    category: string;
-    description: string;
-    _id: string;
-    qty: string;
-  };
+  function handleIncreaseCard(product: Product) {
+    dispatch(addToCart(product));
+  }
+  function handleDecreaseCard(id: string) {
+    dispatch(removeFromCart(id));
+  }
 
   return (
-    <div>
-      {data?.length
-        ? data.map((product: Product) => (
-            <div key={product._id}>
-              <div>name: {product.name}</div>
-              <div> Price: {product.price}</div>
-              <div>Qty: {product.qty}</div>
+    <div className={s.cart}>
+      {items.length ? (
+        items.map((product) => (
+          <div key={product._id} className={s.item}>
+            <img src={product.image} alt={product.name} className={s.image} />
+            <div className={s.info}>
+              <div className={s.name}>{product.name}</div>
+              <div className={s.price}>${product.price}</div>
+              <div className={s.qty}>
+                <button onClick={() => handleDecreaseCard(product._id)}>
+                  -
+                </button>
+                <span>{product.qty}</span>
+                <button onClick={() => handleIncreaseCard(product)}>+</button>
+              </div>
             </div>
-          ))
-        : 'loading'}
+          </div>
+        ))
+      ) : (
+        <div className={s.empty}>Корзина пуста</div>
+      )}
     </div>
   );
 };

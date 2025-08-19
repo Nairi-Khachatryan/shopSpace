@@ -1,3 +1,4 @@
+import { ProdItemMoreInfo } from '../components/prodItemMoreInfo/ProdItemMoreInfo';
 import { NotFoundPage } from '../components/notFound/NotFoundPage';
 import { CreateProduct } from '../components/admin/createProduct';
 import { UpdateProduct } from '../components/admin/updateProduct';
@@ -10,7 +11,6 @@ import { AdminRoutes } from './AdminRoutes';
 import { Profile } from '../pages/profile';
 import { Home } from '../pages/home';
 import { ROUTES } from './paths';
-import { ProdItemMoreInfo } from '../components/prodItemMoreInfo/ProdItemMoreInfo';
 
 export const router = createBrowserRouter([
   {
